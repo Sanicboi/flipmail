@@ -77,9 +77,11 @@ import { StringSession } from "telegram/sessions";
     client.addEventHandler(async (e) => {
         if (!e.isPrivate) return;
         const dialogs = await client.getDialogs();
-        const uDialog = dialogs.find(el => el.entity?.id === e.message.senderId);
+        const uDialog = dialogs.find(el => el.entity?.id.toJSON() === e.message.senderId?.toJSON());
+        console.log("Dialog search")
         if (!uDialog) return;
         const entity = uDialog.entity as Api.User;
+        console.log("UNAME check")
         if (entity.username !== USERNAME) return;
 
         const res = await openai.responses.create({
