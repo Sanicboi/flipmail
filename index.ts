@@ -94,4 +94,4 @@ import { StringSession } from "telegram/sessions";
             message: res.output_text
         });
     }, new NewMessage())
-})
+})();
